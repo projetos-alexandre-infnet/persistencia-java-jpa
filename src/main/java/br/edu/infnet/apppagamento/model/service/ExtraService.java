@@ -2,7 +2,7 @@ package br.edu.infnet.apppagamento.model.service;
 
 import br.edu.infnet.apppagamento.model.domain.Extra;
 import br.edu.infnet.apppagamento.model.domain.Usuario;
-import br.edu.infnet.apppagamento.model.repository.ExtraRepository;
+import br.edu.infnet.apppagamento.model.persistence.ExtraDAO;
 import br.edu.infnet.apppagamento.model.test.AppImpressao;
 import org.springframework.stereotype.Service;
 
@@ -11,25 +11,25 @@ import java.util.Collection;
 @Service
 public class ExtraService {
 
-	private final ExtraRepository extraRepository;
+	private final ExtraDAO extraDAO;
 
-	public ExtraService(ExtraRepository extraRepository) {
-		this.extraRepository = extraRepository;
+	public ExtraService(ExtraDAO extraDAO) {
+		this.extraDAO = extraDAO;
 	}
 
 	public void incluir(Extra extra) {
-		extraRepository.save(extra);
+		extraDAO.save(extra);
 		AppImpressao.relatorio("Extra: ", extra);
 	}
 	
 	public Collection<Extra> obterLista() {
-		return (Collection<Extra>) extraRepository.findAll();
+		return (Collection<Extra>) extraDAO.listAll();
 	}
 	public Collection<Extra> obterLista(Usuario usuario) {
-		return (Collection<Extra>) extraRepository.findAll(usuario.getId());
+		return (Collection<Extra>) extraDAO.getById(usuario.getId());
 	}
 
 	public void excluir(Integer id) {
-		extraRepository.deleteById(id);
+		extraDAO.delete(id);
 	}
 }

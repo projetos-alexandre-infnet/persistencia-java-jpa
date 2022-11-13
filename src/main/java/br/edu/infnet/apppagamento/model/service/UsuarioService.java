@@ -1,7 +1,7 @@
 package br.edu.infnet.apppagamento.model.service;
 
 import br.edu.infnet.apppagamento.model.domain.Usuario;
-import br.edu.infnet.apppagamento.model.repository.UsuarioRepository;
+import br.edu.infnet.apppagamento.model.persistence.UsuarioDAO;
 import br.edu.infnet.apppagamento.model.test.AppImpressao;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +12,10 @@ import java.util.Map;
 @Service
 public class UsuarioService {
 
-	private UsuarioRepository usuarioRepository;
+	private UsuarioDAO usuarioDAO;
 
-	public UsuarioService(UsuarioRepository usuarioRepository) {
-		this.usuarioRepository = usuarioRepository;
+	public UsuarioService(UsuarioDAO usuarioDAO) {
+		this.usuarioDAO = usuarioDAO;
 	}
 
 	private static Map<String, Usuario> mapaUsuario = new HashMap<>();
@@ -33,7 +33,7 @@ public class UsuarioService {
 	
 	
 	public void incluir(Usuario usuario) {
-		usuarioRepository.save(usuario);
+		usuarioDAO.save(usuario);
 
 		mapaUsuario.put(usuario.getEmail(), usuario);
 		AppImpressao.relatorio("Usuario: ", usuario);

@@ -2,7 +2,7 @@ package br.edu.infnet.apppagamento.model.service;
 
 import br.edu.infnet.apppagamento.model.domain.Conta;
 import br.edu.infnet.apppagamento.model.domain.Usuario;
-import br.edu.infnet.apppagamento.model.repository.ContaRepository;
+import br.edu.infnet.apppagamento.model.persistence.ContaDAO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,21 +10,21 @@ import java.util.List;
 @Service
 public class ContaService {
 
-    private ContaRepository contaRepository;
+    private ContaDAO contaDAO;
 
-    public ContaService(ContaRepository contaRepository) {
-        this.contaRepository = contaRepository;
+    public ContaService(ContaDAO contaDAO) {
+        this.contaDAO = contaDAO;
     }
 
     public List<Conta> obterLista() {
-        return (List<Conta>) contaRepository.findAll();
+        return (List<Conta>) contaDAO.listAll();
     }
 
     public List<Conta> obterLista(Usuario usuario) {
-        return (List<Conta>) contaRepository.findAll(usuario.getId());
+        return (List<Conta>) contaDAO.getById(usuario.getId());
     }
 
     public void excluir(Integer id) {
-        contaRepository.deleteById(id);
+        contaDAO.delete(id);
     }
 }

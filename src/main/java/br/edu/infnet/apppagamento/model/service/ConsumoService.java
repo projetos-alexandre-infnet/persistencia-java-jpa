@@ -2,37 +2,35 @@ package br.edu.infnet.apppagamento.model.service;
 
 import br.edu.infnet.apppagamento.model.domain.Consumo;
 import br.edu.infnet.apppagamento.model.domain.Usuario;
-import br.edu.infnet.apppagamento.model.repository.ConsumoRepository;
+import br.edu.infnet.apppagamento.model.persistence.ConsumoDAO;
 import br.edu.infnet.apppagamento.model.test.AppImpressao;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class ConsumoService {
 
-	private final ConsumoRepository consumoRepository;
+	private final ConsumoDAO consumoDAO;
 
-	public ConsumoService(ConsumoRepository consumoRepository) {
-		this.consumoRepository = consumoRepository;
+	public ConsumoService(ConsumoDAO consumoDAO) {
+		this.consumoDAO = consumoDAO;
 	}
 
 	public void incluir(Consumo consumo) {
-		consumoRepository.save(consumo);
+		consumoDAO.save(consumo);
 		AppImpressao.relatorio("Consumo: ", consumo);
 	}
 	
 	
 	public Collection<Consumo> obterLista() {
-		return (Collection<Consumo>) consumoRepository.findAll();
+		return (Collection<Consumo>) consumoDAO.listAll();
 	}
 	public Collection<Consumo> obterLista(Usuario usuario) {
-		return (Collection<Consumo>) consumoRepository.findAll(usuario.getId());
+		return (Collection<Consumo>) consumoDAO.getById(usuario.getId());
 	}
 
 	public void excluir(Integer id) {
-		consumoRepository.deleteById(id);
+		consumoDAO.delete(id);
 	}
 }
