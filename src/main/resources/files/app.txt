@@ -1,0 +1,25 @@
+P;Projeto App Pagamentos;Projeto para Pagamentos
+C;Conta
+A;Id;Integer;atributo identificador
+A;contaAtiva;boolean;Indica se a conta é ativa
+A;descrição;String;descrição da conta
+C;Consumo
+A;item;String;item existente na conta
+A;quantidadeDeItens;Integer;quantidade de itens existentes na conta
+A;individualOuGrupo;String;identifica se o consumo é individual ou em grupo
+C;Extra
+A;numeroDeParcelas;Integer;quantidade de parcelas da conta
+A;pagamentoLote;boolean;indica se o pagamento é em lote
+A;pagamentoUnico;boolean;indica se o pagamento é único
+C;Tributo
+A;ICMS;BigDecimal;imposto estadual
+A;IOF;BigDecimal;imposto sobre operações financeiras
+A;ISS;BigDecimal;imposto sobre serviços
+C;Cliente
+A;Id;Integer;atributo identificador
+A;nome;String;nome do cliente
+A;email;String;email do cliente
+C;Pagamento
+A;numeroCartao;String;numero do cartão para pagamento
+A;bandeira;String;bandeira do cartão
+A;valor;BigDecimal;valor do pagamento
